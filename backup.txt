@@ -1,0 +1,106 @@
+/*
+    // const orcamentos = useSelector((state) => state.newValue)
+    // Metodo sem Redux
+    /* componentDidMount = () => {
+        this.loadOrcamentos();
+    };
+
+    loadOrcamentos = async () => {
+        try {
+            const getOrcamentos = await AsyncStorage.getItem('orcamentos');
+            const parsedOrcamentos = JSON.parse(getOrcamentos);
+            this.setState({ orcamentos: parsedOrcamentos });
+        } catch (err) {
+            alert('Erro ao Carregar dados');
+        }
+    };
+
+    handleSubmit = () => {
+        // eslint-disable-next-line no-undef
+    };
+
+
+    // Metodo Antigo
+    /*
+        saveTodos = async (novoOrcamento) => {
+        const saveTodos = await AsyncStorage.setItem(
+            'orcamentos',
+            JSON.stringify(novoOrcamento),
+        );
+
+        addTodo = (nome, servico, valor) => {
+        if (nome !== '') {
+            this.setState((prevState) => {
+                const ID = uuidv1();
+                const newToDoObject = {
+                    [ID]: {
+                        id: ID,
+                        nome,
+                        servico,
+                        valor,
+                        createdAt: Date.now(),
+                    },
+                };
+                const newState = {
+                    ...prevState,
+                    orcamentos: {
+                        ...prevState.orcamentos,
+                        ...newToDoObject,
+                    },
+                };
+                this.saveTodos(newState.orcamentos);
+
+                return { ...newState };
+            });
+        }
+    };
+    };
+
+    handleSubmit = () => {
+        const { nome, servico, valor } = this.state;
+        alert(`${nome}`);
+
+        // eslint-disable-next-line no-undef
+        this.addTodo(nome, servico, valor);
+    };
+    */
+v
+
+/*
+        render() {
+
+                <List
+                    data={orcamentos} // Funcionando
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <Orcamento>
+                            <Nome>Cliente: {item.nome}</Nome>
+                            <Servico>Serviço: {item.servico}</Servico>
+                            <Valor> Valor: R$ {item.valor}</Valor>
+                            <Valor> Data: {item.createAt}</Valor>
+
+                            <OrcamentoButton onPress={() => {}}>
+                                <ButtonText>Ver Detalhes</ButtonText>
+                            </OrcamentoButton>
+                        </Orcamento>
+                    )}
+                /> */
+
+
+/*
+        componentDidMount = () => {
+        this.loadOrcamentos();
+    };
+
+    loadOrcamentos = async () => {
+        try {
+            const getOrcamentos = await AsyncStorage.getItem('orcamentos');
+            const parsedOrcamentos = JSON.parse(getOrcamentos);
+            this.setState({ orcamentos: parsedOrcamentos });
+        } catch (err) {
+            alert('Erro ao Carregar dados');
+        }
+    };
+
+    // console.log('STATE DO ORACEMENTO', orcamentos);
+    */
