@@ -20,18 +20,26 @@ Proximas Features:
     - API  em nodejs para salvar os dados
 
 ## Sobre as tecnologias aplicadas nesse projeto
-- React Native
+- React Native CLI
 - Redux
-- Offline First
+- Offline First - Salvar no Async Storage com ID unico
+- React Native UUID
 - Componentes Funcionais
 - Styled Components
-- Pattern
+- Patterns
+    - Eslint
+    - Prettier
+    - EditorConfig
 - Persist Reducer
 - React Navigation - Encapsulamento de Tab Navigator com Stack Navigator
 
 
 
-
+### Proxímos passos
+- Estilizar Interface/Layout da aplicação;
+    - Meu foco atual de estudos
+- Gerar arquivo PDF do Orçamento
+- Compartilhar orçamento por Email/ Whatsapp
 
 
 
