@@ -72,7 +72,37 @@ export const TextTitle = styled.Text`
     font-size: 20px;
     margin-top: 10px;
 `;
+export const NumOrcamento = styled.Text`
+    color: #5a798c;
+    font-weight: bold;
+    font-size: 20px;
+`;
+export const TextNumOrcamento = styled.Text`
+    color: #5a798c;
+    font-weight: normal;
+    font-size: 20px;
+`;
+export const Data = styled.Text`
+    color: #5a798c;
+    font-weight: bold;
+    font-size: 20px;
+`;
+export const TextData = styled.Text`
+    color: #5a798c;
+    font-weight: normal;
+    font-size: 20px;
+`;
 
+export const InfData = styled.View`
+    flex: 1;
+    flex-direction: row;
+    margin-bottom: 10px;
+`;
+export const InfOrc = styled.View`
+    flex: 1;
+    flex-direction: row;
+    margin-bottom: 10px;
+`;
 export const Separador = styled.View`
     height: 1px;
     background-color: rgba(0, 0, 0, 0.1);

@@ -50,7 +50,7 @@ export const OrcamentoButton = styled(RectButton)`
     background: rgba(255, 255, 255, 0.6);
     justify-content: center;
     align-items: center;
-    height: 130px;
+    height: 170px;
 `;
 export const ButtonText = styled.Text`
     margin-top: 30px;

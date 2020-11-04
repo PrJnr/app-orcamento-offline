@@ -39,6 +39,10 @@ function Orcamentos({ orc, navigation }) {
                     <Orcamento>
                         <OrcamentoButton onPress={() => handleNavigate(item)}>
                             <Nome>Cliente: {item.nome}</Nome>
+                            <Nome>
+                                Data: {`${item.dia}/${item.mes}/${item.ano}`}
+                            </Nome>
+                            <Nome>Contato: {item.telefone}</Nome>
                             <Servico>Serviço: {item.servico}</Servico>
                             <Valor> Valor: R$ {item.valor}</Valor>
                             <ButtonText>Ver Detalhes</ButtonText>

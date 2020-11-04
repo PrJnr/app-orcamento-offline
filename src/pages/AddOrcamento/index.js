@@ -7,12 +7,11 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-alert */
 /* eslint-disable react/state-in-constructor */
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 
 import { connect } from 'react-redux';
 
 import uuidv1 from 'react-native-uuid';
-import ErrorAwesomeAlert from 'react-native-awesome-alerts';
 
 import {
     Container,
@@ -25,6 +24,12 @@ import {
     Separador,
     TextTitle,
     ButtonTeste,
+    NumOrcamento,
+    TextNumOrcamento,
+    InfOrc,
+    Data,
+    TextData,
+    InfData,
 } from './styles';
 
 class AddOrcamento extends Component {
@@ -33,16 +38,22 @@ class AddOrcamento extends Component {
         servico: '',
         valor: '',
         telefone: '',
+        numOrc:
+            new Date().getDate() +
+            new Date().getMinutes() +
+            new Date().getSeconds(),
+        dia: new Date().getDate(),
+        mes: new Date().getMonth() + 1,
+        ano: new Date().getFullYear(),
     };
 
     handleAddOrcamento() {
         const { navigation, dispatch } = this.props;
-        const { nome, servico, valor, telefone } = this.state;
+        const { nome, servico, valor, telefone, dia, mes, ano } = this.state;
 
-        if (nome || servico || valor || telefone === '') {
+        /*   if (nome || servico || valor || telefone === '') {
             return alert('Preencha todos os campos');
-        }
-
+        } */
         const ID = uuidv1();
 
         const newOrcamento = {
@@ -51,6 +62,9 @@ class AddOrcamento extends Component {
             servico,
             valor,
             telefone,
+            dia,
+            mes,
+            ano,
             // createAt: new Date(),
         };
 
@@ -64,11 +78,31 @@ class AddOrcamento extends Component {
     }
 
     render() {
-        const { nome, servico, valor, telefone } = this.state;
+        const {
+            nome,
+            servico,
+            valor,
+            telefone,
+            numOrc,
+            dia,
+            mes,
+            ano,
+        } = this.state;
+
         return (
             <Container>
                 <TextTitle>NOVO ORÇAMENTO</TextTitle>
+
                 <Form>
+                    <InfOrc>
+                        <TextNumOrcamento>Num. Orçamento: </TextNumOrcamento>
+                        <NumOrcamento>{numOrc}</NumOrcamento>
+                    </InfOrc>
+                    <InfData>
+                        <TextData>Data: </TextData>
+                        <Data>{`${dia}/${mes}/${ano}`}</Data>
+                    </InfData>
+                    <Separador />
                     <Text>INFORMAÇÕES DO CLIENTE:</Text>
                     <FormInput
                         autoCorrect={false}
