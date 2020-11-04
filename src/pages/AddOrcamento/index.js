@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/static-property-placement */
 /* eslint-disable no-undef */
@@ -11,14 +12,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import uuidv1 from 'react-native-uuid';
+import ErrorAwesomeAlert from 'react-native-awesome-alerts';
 
 import {
     Container,
     Form,
     FormInput,
-    SubmitButton,
+    // SubmitButton,
     Text,
+    // TextButton,
     FormInputServico,
+    Separador,
+    TextTitle,
+    ButtonTeste,
 } from './styles';
 
 class AddOrcamento extends Component {
@@ -26,15 +32,16 @@ class AddOrcamento extends Component {
         nome: '',
         servico: '',
         valor: '',
+        telefone: '',
     };
 
-    handleTeste = () => {
-        console.log('OK');
-    };
-
-    handleAddOrcamento = () => {
+    handleAddOrcamento() {
         const { navigation, dispatch } = this.props;
-        const { nome, servico, valor } = this.state;
+        const { nome, servico, valor, telefone } = this.state;
+
+        if (nome || servico || valor || telefone === '') {
+            return alert('Preencha todos os campos');
+        }
 
         const ID = uuidv1();
 
@@ -43,6 +50,7 @@ class AddOrcamento extends Component {
             nome,
             servico,
             valor,
+            telefone,
             // createAt: new Date(),
         };
 
@@ -50,17 +58,19 @@ class AddOrcamento extends Component {
             type: 'ADD_ORCAMENTO',
             newOrcamento,
         });
+        this.setState({ nome: '', servico: '', valor: '', telefone: '' });
 
         navigation.navigate('Orçamentos');
-    };
+    }
 
     render() {
-        const { nome, servico, valor } = this.state;
+        const { nome, servico, valor, telefone } = this.state;
         return (
             <Container>
+                <TextTitle>NOVO ORÇAMENTO</TextTitle>
                 <Form>
+                    <Text>INFORMAÇÕES DO CLIENTE:</Text>
                     <FormInput
-                        icon="person-outline"
                         autoCorrect={false}
                         autoCapitalize="none"
                         placeholder="Nome do Cliente"
@@ -68,11 +78,26 @@ class AddOrcamento extends Component {
                         value={nome}
                         onChangeText={(text) => this.setState({ nome: text })}
                     />
+                    <FormInput
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                        placeholder="Telefone"
+                        returnKeyType="done"
+                        keyboardType="number-pad"
+                        value={telefone}
+                        onChangeText={(text) =>
+                            this.setState({ telefone: text })
+                        }
+                    />
+
+                    <Separador />
+
+                    <Text>SERVIÇOS:</Text>
+
                     <FormInputServico
                         icon="business"
                         autoCorrect={false}
                         autoCapitalize="none"
-                        multiline="true"
                         placeholder="Descrição do Serviço"
                         value={servico}
                         onChangeText={(text) =>
@@ -85,18 +110,16 @@ class AddOrcamento extends Component {
                         placeholder="Valor R$:"
                         value={valor}
                         keyboardType="numeric"
-                        onSubmitEditing={() => this.handleAddOrcamento()}
+                        // onSubmitEditing={() => this.handleAddOrcamento()}
                         onChangeText={(text) => this.setState({ valor: text })}
                     />
-                    <SubmitButton onPress={this.handleTeste}>
-                        <Text>Salvar Orçamento</Text>
-                    </SubmitButton>
+                    <Separador />
+
+                    <ButtonTeste
+                        title="SALVAR ORÇAMENTO"
+                        onPress={() => this.handleAddOrcamento()}
+                    />
                 </Form>
-                <SubmitButton
-                    onPress={() => this.handleAddOrcamento(this.state)}
-                >
-                    <Text>Salvar Orçamento</Text>
-                </SubmitButton>
             </Container>
         );
     }

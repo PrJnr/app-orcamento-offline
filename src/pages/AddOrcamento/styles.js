@@ -47,8 +47,34 @@ export const SubmitButton = styled(RectButton)`
     justify-content: center;
 `;
 
+export const ButtonTeste = styled.Button`
+    height: 50px;
+    background: #3b9edd;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const Text = styled.Text`
+    color: #3b9edd;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+`;
+export const TextButton = styled.Text`
     color: #fff;
     font-weight: bold;
     font-size: 16px;
+`;
+export const TextTitle = styled.Text`
+    color: #5a798c;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+`;
+
+export const Separador = styled.View`
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
 `;
