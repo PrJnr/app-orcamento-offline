@@ -32,7 +32,7 @@ export const FormInputServico = styled.TextInput.attrs({
 })`
     margin-bottom: 10px;
     flex: 1;
-    height: 80px;
+    height: 40px;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     padding: 0 15px;
@@ -53,6 +53,16 @@ export const ButtonTeste = styled.Button`
     border-radius: 4px;
     align-items: center;
     justify-content: center;
+    margin-bottom: 5px;
+`;
+export const ButtonCancelar = styled.Button`
+    height: 50px;
+    background: #ff6347;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    margin-top: 10px;
 `;
 
 export const Text = styled.Text`
@@ -60,6 +70,13 @@ export const Text = styled.Text`
     font-weight: bold;
     font-size: 16px;
     margin-bottom: 5px;
+`;
+export const ValorTotal = styled.Text`
+    color: #3b9edd;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    text-align: right;
 `;
 export const TextButton = styled.Text`
     color: #fff;
@@ -103,8 +120,38 @@ export const InfOrc = styled.View`
     flex-direction: row;
     margin-bottom: 10px;
 `;
+
+export const ContainerListas = styled.View`
+    flex: 1;
+    flex-direction: row;
+`;
+export const ContainerValorTotal = styled.View`
+    flex: 1;
+    flex-direction: row;
+`;
+export const ListaServico = styled.View`
+    flex: 1;
+    width: 50px;
+`;
+export const ListaValor = styled.View`
+    flex: 1;
+`;
+
+export const Servico = styled.Text`
+    color: #5a798c;
+    font-weight: normal;
+    font-size: 20px;
+`;
+
+export const Valor = styled.Text`
+    color: #5a798c;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: right;
+`;
 export const Separador = styled.View`
     height: 1px;
     background-color: rgba(0, 0, 0, 0.1);
     margin-bottom: 25px;
+    margin-top: 15px;
 `;

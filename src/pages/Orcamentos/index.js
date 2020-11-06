@@ -27,9 +27,13 @@ function Orcamentos({ orc, navigation }) {
             id: item.id,
             nome: item.nome,
             servico: item.servico,
+
             valor: item.valor,
         });
     };
+
+    const { listaValores } = orc;
+
     return (
         <Container>
             <List
@@ -43,8 +47,9 @@ function Orcamentos({ orc, navigation }) {
                                 Data: {`${item.dia}/${item.mes}/${item.ano}`}
                             </Nome>
                             <Nome>Contato: {item.telefone}</Nome>
-                            <Servico>Serviço: {item.servico}</Servico>
-                            <Valor> Valor: R$ {item.valor}</Valor>
+
+                            <Valor> Valor: R$ {item.v}</Valor>
+
                             <ButtonText>Ver Detalhes</ButtonText>
                         </OrcamentoButton>
                     </Orcamento>

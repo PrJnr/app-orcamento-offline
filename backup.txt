@@ -104,3 +104,31 @@ v
 
     // console.log('STATE DO ORACEMENTO', orcamentos);
     */
+
+
+onChangeText={(text) =>
+                    this.setState({ servico: [...servico, text] })
+                }
+
+const listaServicos = this.state.listaServicos.map((s) => (
+        <Input
+            onChange={this.handleChange}
+            key={s.id}
+            placeholder="Descrição do Serviço"
+            value={servico}
+            servico={s}
+        />
+    ));
+
+handleChange(event) {
+    this.setState({ servico: [...servico, event.target.value] });
+}
+
+handleAdicionarServico() {
+    const { listaServicos } = this.state;
+    listaServicos.push({ descricao: '' });
+
+    this.setState({
+        listaServicos,
+    });
+}

@@ -7,7 +7,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-alert */
 /* eslint-disable react/state-in-constructor */
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
@@ -24,17 +24,29 @@ import {
     Separador,
     TextTitle,
     ButtonTeste,
+    ButtonCancelar,
     NumOrcamento,
     TextNumOrcamento,
     InfOrc,
     Data,
     TextData,
     InfData,
+    ContainerListas,
+    ListaServico,
+    Servico,
+    Valor,
+    ListaValor,
+    ContainerValorTotal,
+    ValorTotal,
 } from './styles';
 
 class AddOrcamento extends Component {
     state = {
         nome: '',
+        listaServicos: [],
+        listaValores: [],
+        valorTotal: '',
+
         servico: '',
         valor: '',
         telefone: '',
@@ -61,6 +73,8 @@ class AddOrcamento extends Component {
             nome,
             servico,
             valor,
+            listaServicos,
+            listaValores,
             telefone,
             dia,
             mes,
@@ -72,9 +86,33 @@ class AddOrcamento extends Component {
             type: 'ADD_ORCAMENTO',
             newOrcamento,
         });
-        this.setState({ nome: '', servico: '', valor: '', telefone: '' });
+        this.setState({
+            nome: '',
+            servico: '',
+            valor: '',
+            telefone: '',
+            listaServicos: [],
+            listaValores: [],
+        });
 
         navigation.navigate('Orçamentos');
+    }
+
+    handleNewServico() {
+        const { servico, listaServicos, valor, listaValores } = this.state;
+        const valores = listaValores.reduce(
+            (total, numero) => total + parseInt(numero, 10),
+            0,
+        );
+
+        this.setState({
+            listaServicos: [...listaServicos, servico],
+            listaValores: [...listaValores, valor],
+        });
+
+        this.setState({ valorTotal: valores });
+
+        this.setState({ servico: '', valor: '' });
     }
 
     render() {
@@ -82,6 +120,7 @@ class AddOrcamento extends Component {
             nome,
             servico,
             valor,
+            valorTotal,
             telefone,
             numOrc,
             dia,
@@ -126,10 +165,9 @@ class AddOrcamento extends Component {
 
                     <Separador />
 
-                    <Text>SERVIÇOS:</Text>
+                    <Text>CADASTRAR SERVIÇO</Text>
 
                     <FormInputServico
-                        icon="business"
                         autoCorrect={false}
                         autoCapitalize="none"
                         placeholder="Descrição do Serviço"
@@ -147,13 +185,46 @@ class AddOrcamento extends Component {
                         // onSubmitEditing={() => this.handleAddOrcamento()}
                         onChangeText={(text) => this.setState({ valor: text })}
                     />
+
+                    <ButtonTeste
+                        title="Adicionar Serviço"
+                        onPress={() => this.handleNewServico()}
+                    />
+
                     <Separador />
+                    <Text>SERVIÇOS: </Text>
+                    <ContainerListas>
+                        <ListaServico>
+                            {this.state.listaServicos.map((s) => (
+                                <Servico key={s}>{s}</Servico>
+                            ))}
+                        </ListaServico>
+                        <ListaValor>
+                            {this.state.listaValores.map((s) => (
+                                <Valor key={s}>{`R$: ${s}`}</Valor>
+                            ))}
+                        </ListaValor>
+                    </ContainerListas>
+                    <Separador />
+                    <ContainerValorTotal>
+                        <Text>Valor Total: </Text>
+                        <ValorTotal>{valorTotal} </ValorTotal>
+                    </ContainerValorTotal>
 
                     <ButtonTeste
                         title="SALVAR ORÇAMENTO"
                         onPress={() => this.handleAddOrcamento()}
                     />
+                    <ButtonCancelar
+                        title="CANCELAR"
+                        onPress={() => this.handleAddOrcamento()}
+                    />
                 </Form>
+
+                {/* <ButtonTeste
+                    title="TESTE"
+                    onPress={() => console.log(this.state.listaServicos)}
+                /> */}
             </Container>
         );
     }
