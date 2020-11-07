@@ -123,18 +123,25 @@ export const InfOrc = styled.View`
 
 export const ContainerListas = styled.View`
     flex: 1;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: space-between;
 `;
-export const ContainerValorTotal = styled.View`
+export const ContainerLinhas = styled.View`
     flex: 1;
     flex-direction: row;
+    justify-content: space-between;
 `;
+
 export const ListaServico = styled.View`
     flex: 1;
     width: 50px;
+    margin-bottom: 10px;
+    flex-direction: column;
 `;
 export const ListaValor = styled.View`
     flex: 1;
+    margin-bottom: 10px;
+    flex-direction: column;
 `;
 
 export const Servico = styled.Text`
@@ -148,6 +155,10 @@ export const Valor = styled.Text`
     font-weight: normal;
     font-size: 20px;
     text-align: right;
+`;
+export const ContainerValorTotal = styled.View`
+    flex: 1;
+    flex-direction: row;
 `;
 export const Separador = styled.View`
     height: 1px;

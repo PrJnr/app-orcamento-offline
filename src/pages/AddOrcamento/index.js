@@ -32,6 +32,7 @@ import {
     TextData,
     InfData,
     ContainerListas,
+    ContainerLinhas,
     ListaServico,
     Servico,
     Valor,
@@ -43,17 +44,14 @@ import {
 class AddOrcamento extends Component {
     state = {
         nome: '',
-        listaServicos: [],
-        listaValores: [],
+        contador: 0,
+        servicos: [],
         valorTotal: '',
-
         servico: '',
         valor: '',
         telefone: '',
-        numOrc:
-            new Date().getDate() +
-            new Date().getMinutes() +
-            new Date().getSeconds(),
+        numOrc: '',
+
         dia: new Date().getDate(),
         mes: new Date().getMonth() + 1,
         ano: new Date().getFullYear(),
@@ -61,25 +59,38 @@ class AddOrcamento extends Component {
 
     handleAddOrcamento() {
         const { navigation, dispatch } = this.props;
-        const { nome, servico, valor, telefone, dia, mes, ano } = this.state;
+        const {
+            nome,
+            telefone,
+            dia,
+            mes,
+            ano,
+            servicos,
+            valorTotal,
+        } = this.state;
 
-        /*   if (nome || servico || valor || telefone === '') {
-            return alert('Preencha todos os campos');
-        } */
+        function isEmpty(obj) {
+            return Object.keys(obj).length === 0;
+        }
+
+        if (isEmpty(servicos)) {
+            return alert('Adicione um serviço antes de salvar...');
+        }
+
+        if (nome && telefone === '') {
+            return alert('Preencha as informações de contato do cliente...');
+        }
         const ID = uuidv1();
 
         const newOrcamento = {
             id: ID,
             nome,
-            servico,
-            valor,
-            listaServicos,
-            listaValores,
+            servicos,
+            valorTotal,
             telefone,
             dia,
             mes,
             ano,
-            // createAt: new Date(),
         };
 
         dispatch({
@@ -91,28 +102,73 @@ class AddOrcamento extends Component {
             servico: '',
             valor: '',
             telefone: '',
-            listaServicos: [],
-            listaValores: [],
+            servicos: [],
+            valorTotal: '',
         });
 
         navigation.navigate('Orçamentos');
     }
 
     handleNewServico() {
-        const { servico, listaServicos, valor, listaValores } = this.state;
-        const valores = listaValores.reduce(
-            (total, numero) => total + parseInt(numero, 10),
-            0,
-        );
+        const {
+            servico,
+
+            valor,
+
+            servicos,
+            contador,
+        } = this.state;
+
+        function getTotal(total, item) {
+            return total + parseInt(item.valor, 10);
+        }
+
+        if (servico === '' || valor === '') {
+            alert('Preencha todos os campos...');
+        } else {
+            const contadorID = contador + 1;
+            this.setState({ contador: contadorID });
+
+            const soma = servicos
+                .reduce(getTotal, parseInt(valor, 10))
+                .toFixed(2);
+
+            this.setState({ valorTotal: soma });
+
+            const ServicoGeral = {
+                id: contadorID,
+                servico,
+                valor,
+            };
+
+            this.setState({ servicos: [...servicos, ServicoGeral] });
+
+            this.setState({ servico: '', valor: '' });
+        }
+    }
+
+    handleCancelar() {
+        /* const {
+            servico,
+            nome,
+            listaServicos,
+            listaValores,
+            valor,
+            telefone,
+        } = this.state; */
+
+        const { navigation } = this.props;
 
         this.setState({
-            listaServicos: [...listaServicos, servico],
-            listaValores: [...listaValores, valor],
+            servico: '',
+            nome: '',
+            valorTotal: '',
+            listaServicos: [],
+            listaValores: [],
+            valor: '',
+            telefone: '',
         });
-
-        this.setState({ valorTotal: valores });
-
-        this.setState({ servico: '', valor: '' });
+        navigation.navigate('Orçamentos');
     }
 
     render() {
@@ -194,21 +250,23 @@ class AddOrcamento extends Component {
                     <Separador />
                     <Text>SERVIÇOS: </Text>
                     <ContainerListas>
-                        <ListaServico>
-                            {this.state.listaServicos.map((s) => (
-                                <Servico key={s}>{s}</Servico>
-                            ))}
-                        </ListaServico>
-                        <ListaValor>
-                            {this.state.listaValores.map((s) => (
-                                <Valor key={s}>{`R$: ${s}`}</Valor>
-                            ))}
-                        </ListaValor>
+                        <ContainerLinhas>
+                            <ListaServico>
+                                {this.state.servicos.map((s) => (
+                                    <Servico key={s.id}>{s.servico}</Servico>
+                                ))}
+                            </ListaServico>
+                            <ListaValor>
+                                {this.state.servicos.map((s) => (
+                                    <Valor key={s.id}>{`R$: ${s.valor}`}</Valor>
+                                ))}
+                            </ListaValor>
+                        </ContainerLinhas>
                     </ContainerListas>
                     <Separador />
                     <ContainerValorTotal>
                         <Text>Valor Total: </Text>
-                        <ValorTotal>{valorTotal} </ValorTotal>
+                        <ValorTotal>R$ {valorTotal} </ValorTotal>
                     </ContainerValorTotal>
 
                     <ButtonTeste
@@ -217,7 +275,7 @@ class AddOrcamento extends Component {
                     />
                     <ButtonCancelar
                         title="CANCELAR"
-                        onPress={() => this.handleAddOrcamento()}
+                        onPress={() => this.handleCancelar()}
                     />
                 </Form>
 
